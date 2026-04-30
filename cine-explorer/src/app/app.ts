@@ -1,15 +1,13 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { MovieCardComponent } from './components/movie-card/movie-card';
 
-// decorador que define el componente
 @Component({
   selector: 'app-root',
-  // templateUrl es la ruta del archivo html que define la vista del componente
+  standalone: true,
+  imports: [MovieCardComponent],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss']
 })
-
-// logica de la aplicacion
-export class App { 
-  protected readonly title = signal('cine-explorer');
-  titulo: string = '🎬 Cine explorer'; 
+export class App {
+  titulo: string = 'CineExplorer';
 }

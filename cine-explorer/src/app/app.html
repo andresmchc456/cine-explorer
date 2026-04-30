@@ -3,18 +3,31 @@
 
 <!-- <p>Explora las mejores películas del mundo</p> -->
 <!-- componete es algo reutilizables
-recibe informacion y emite informacion son 
-completamete reutilizables tien html, css pruebas logica y ts 
+recibe informacion y emite informacion son
+completamete reutilizables tien html, css pruebas logica y ts
 -->
 
 
 
 <div class="container text-center mt-5">
-  
-  <h1 class="display-4">🎬 CineExplorer</h1>
- 
-  <p class="lead text-muted">Explora las mejores películas del mundo</p>
- 
-  <button class="btn btn-primary">Empezar a explorar</button>
 
+  <h1 class="display-4">🎬 CineExplorer</h1>
+  <p class="lead text-muted">Explora las mejores películas del mundo</p>
+
+  <!-- Grid de tarjetas -->
+  <!-- row: fila de Bootstrap -->
+  <!-- g-4: gap (espacio) de 4 entre columnas -->
+  <div class="row g-4">
+    <!-- col-md-4: 3 columnas en pantallas medianas y grandes -->
+    <!-- col-sm-6: 2 columnas en pantallas pequeñas -->
+    <div class="col-sm-6 col-md-4">
+      <app-movie-card />
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <app-movie-card />
+    </div>
+    <div class="col-sm-6 col-md-4">
+      <app-movie-card />
+    </div>
+  </div>
 </div>
