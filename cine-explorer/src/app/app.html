@@ -9,25 +9,25 @@ completamete reutilizables tien html, css pruebas logica y ts
 
 
 
-<div class="container text-center mt-5">
 
-  <h1 class="display-4">🎬 CineExplorer</h1>
-  <p class="lead text-muted">Explora las mejores películas del mundo</p>
+<div class="container py-4">
+  <h1 class="display-5 mb-1">🎬 {{ titulo }}</h1>
+  <p class="lead text-muted mb-4">Explora las mejores películas del mundo</p>
 
-  <!-- Grid de tarjetas -->
-  <!-- row: fila de Bootstrap -->
-  <!-- g-4: gap (espacio) de 4 entre columnas -->
+ 
   <div class="row g-4">
-    <!-- col-md-4: 3 columnas en pantallas medianas y grandes -->
-    <!-- col-sm-6: 2 columnas en pantallas pequeñas -->
-    <div class="col-sm-6 col-md-4">
-      <app-movie-card />
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <app-movie-card />
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <app-movie-card />
-    </div>
+    @for (movie of peliculas; track movie.id) {
+      <div class="col-sm-6 col-md-4">
+        <!-- [movie]="movie" pasa la película al hijo (property binding a input()) -->
+        <!-- [esFavorita] pasa si esta película está en favoritos -->
+        <!-- (toggleFavorito) escucha el evento emitido por el hijo -->
+        <app-movie-card
+          [movie]="movie"
+          [esFavorita]="esFavorita(movie.id)"
+          (toggleFavorito)="toggleFavorito($event)" />
+      </div>
+    } @empty {
+      <p class="text-muted">No hay películas para mostrar</p>
+    }
   </div>
 </div>

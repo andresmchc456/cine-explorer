@@ -1,33 +1,33 @@
 <div class="card shadow-sm h-100">
-
   <img
-    [src]="'https://image.tmdb.org/t/p/w500' + pelicula.poster_path"
-    [alt]="pelicula.title"
+    [src]="'https://image.tmdb.org/t/p/w500' + movie().poster_path"
+    [alt]="movie().title"
     class="card-img-top">
 
-
-
   <div class="card-body d-flex flex-column">
+    <h5 class="card-title">{{ movie().title }}</h5>
 
-    <h5 class="card-title">{{ pelicula.title }}</h5>
-
-
-    <p class="text-muted mb-2">
-
-      ⭐ {{ pelicula.vote_average }} / 10
-    </p>
+    <p class="text-muted mb-2">⭐ {{ movie().vote_average }} / 10</p>
 
     <p class="card-text flex-grow-1">
-
-      {{ pelicula.overview.length > 120
-        ? pelicula.overview.slice(0, 120) + '...'
-        : pelicula.overview }}
+      {{ movie().overview.length > 120
+        ? movie().overview.slice(0, 120) + '...'
+        : movie().overview }}
     </p>
 
-
-    <button class="btn btn-outline-primary mt-auto">
-
-      Ver detalle
-    </button>
+    <!-- Botón de favorito: cambia según el estado -->
+    <div class="d-flex gap-2 mt-auto">
+      <button class="btn btn-outline-primary flex-grow-1">
+        Ver detalle
+      </button>
+      <button
+        (click)="onToggleFavorito()"
+        class="btn"
+        [class.btn-danger]="esFavorita()"
+        [class.btn-outline-danger]="!esFavorita()">
+        <!-- esFavorita() se lee con paréntesis porque es un signal -->
+        {{ esFavorita() ? '❤️' : '🤍' }}
+      </button>
+    </div>
   </div>
 </div>
