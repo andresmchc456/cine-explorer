@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from './components/movie-card/movie-card';
 import { Movie } from './models/movie';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, MovieCardComponent],
+  imports: [MovieCardComponent],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
 export class App {
   titulo: string = 'CineExplorer';
-  
+
   peliculas: Movie[] = [
     {
       id: 550,

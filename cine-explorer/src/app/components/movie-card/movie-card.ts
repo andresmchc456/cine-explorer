@@ -14,25 +14,16 @@ import { Movie } from '../../models/movie';
 export class MovieCardComponent {
   // Por ahora usamos datos de ejemplo hardcodeados
   // En el próximo capítulo recibiremos los datos del componente padre con @Input
-  // pelicula: Movie = {
-  //   id: 550,
-  //   title: 'Fight Club',
-  //   overview: 'Un oficinista insomne y un fabricante de jabón forman un club de pelea clandestino que evoluciona hacia algo mucho más peligroso.',
-  //   poster_path: '/pB8BM7pdSp6B6Ih7QI4S2t0POoD.jpg',
-  //   backdrop_path: '/hZkgoQYus5dXo3H8T7Uef6DNknx.jpg',
-  //   vote_average: 8.4,
-  //   release_date: '1999-10-15',
-  //   genre_ids: [18, 53]
-  // };
-   movie = input.required<Movie>();
+
+  movie = input.required<Movie>();
 
   // input<boolean>() con valor por defecto false (no es obligatorio pasarlo)
   esFavorita = input<boolean>(false);
 
-  
+
   toggleFavorito = output<Movie>();
 
-  
+
   onToggleFavorito(): void {
     this.toggleFavorito.emit(this.movie());
   }

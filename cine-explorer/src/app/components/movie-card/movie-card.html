@@ -21,10 +21,10 @@
         Ver detalle
       </button>
       <button
-        (click)="onToggleFavorito()"
         class="btn"
         [class.btn-danger]="esFavorita()"
-        [class.btn-outline-danger]="!esFavorita()">
+        [class.btn-outline-danger]="!esFavorita()"
+        (click)="onToggleFavorito()">
         <!-- esFavorita() se lee con paréntesis porque es un signal -->
         {{ esFavorita() ? '❤️' : '🤍' }}
       </button>
