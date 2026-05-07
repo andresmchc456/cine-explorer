@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-// import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { MovieCardComponent } from './components/movie-card/movie-card';
 import { Movie } from './models/movie';
+//IMPORTAR EL SERVICIO DE FAVORITOS
+import { FavoritesService } from './services/favorites.service';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,8 @@ import { Movie } from './models/movie';
 })
 export class App {
   titulo: string = 'CineExplorer';
+
+  private favoritesService = inject(FavoritesService);
 
   peliculas: Movie[] = [
     {
@@ -49,17 +52,12 @@ export class App {
   // Set de IDs de películas favoritas
   favoritasIds: Set<number> = new Set();
 
-  // Verifica si una película es favorita
+  /// Ahora delega al servicio en lugar de manejar un Set local
   esFavorita(id: number): boolean {
-    return this.favoritasIds.has(id);
+    return this.favoritesService.esFavorita(id);
   }
 
-  // Alterna el estado de favorito de una película
   toggleFavorito(movie: Movie): void {
-    if (this.favoritasIds.has(movie.id)) {
-      this.favoritasIds.delete(movie.id);
-    } else {
-      this.favoritasIds.add(movie.id);
-    }
+    this.favoritesService.toggle(movie);
   }
 }
