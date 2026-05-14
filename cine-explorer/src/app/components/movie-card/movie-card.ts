@@ -1,13 +1,14 @@
 // movie-card.component.ts
 // Componente que muestra una tarjeta con la información de una película
 import { Component, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'app-movie-card',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './movie-card.html',
   styleUrls: ['./movie-card.scss']
 })
@@ -20,9 +21,7 @@ export class MovieCardComponent {
   // input<boolean>() con valor por defecto false (no es obligatorio pasarlo)
   esFavorita = input<boolean>(false);
 
-
   toggleFavorito = output<Movie>();
-
 
   onToggleFavorito(): void {
     this.toggleFavorito.emit(this.movie());

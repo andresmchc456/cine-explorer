@@ -1,33 +1,8 @@
-<!--data binding  o interpolacion -->
-<!-- <h1>{{ titulo }}</h1>  -->
+<!-- app.html -->
+<!-- Layout principal de la app -->
 
-<!-- <p>Explora las mejores películas del mundo</p> -->
-<!-- componete es algo reutilizables
-recibe informacion y emite informacion son
-completamete reutilizables tien html, css pruebas logica y ts
--->
+<app-navbar></app-navbar>
 
-
-
-
-<div class="container py-4">
-  <h1 class="display-5 mb-1">🎬 {{ titulo }}</h1>
-  <p class="lead text-muted mb-4">Explora las mejores películas del mundo</p>
-
-
-  <div class="row g-4">
-    @for (movie of peliculas; track movie.id) {
-      <div class="col-sm-6 col-md-4">
-        <!-- [movie]="movie" pasa la película al hijo (property binding a input()) -->
-        <!-- [esFavorita] pasa si esta película está en favoritos -->
-        <!-- (toggleFavorito) escucha el evento emitido por el hijo -->
-        <app-movie-card
-          [movie]="movie"
-          [esFavorita]="esFavorita(movie.id)"
-          (toggleFavorito)="toggleFavorito($event)" />
-      </div>
-    } @empty {
-      <p class="text-muted">No hay películas para mostrar</p>
-    }
-  </div>
-</div>
+<main class="container py-4">
+  <router-outlet></router-outlet>
+</main>
