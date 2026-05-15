@@ -10,6 +10,12 @@ export const routes: Routes = [
         .then((m) => m.MovieDetail)
   },
   {
+    path: 'search',
+    loadComponent: () =>
+      import('./features/search-results/search-results')
+        .then((m) => m.SearchResults)
+  },
+  {
     path: 'favorites',
     loadComponent: () =>
       import('./features/favorites/favorites')

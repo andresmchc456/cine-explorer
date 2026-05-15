@@ -42,3 +42,8 @@ export interface CrewMember{
     name: string;
     job: string;
 }
+
+export interface Credits {
+  cast: CastMember[];
+  crew: CrewMember[];
+}
