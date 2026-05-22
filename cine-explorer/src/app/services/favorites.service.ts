@@ -1,41 +1,36 @@
-
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { Movie } from '../models/movie';
 
 @Injectable({ providedIn: 'root' })
 export class FavoritesService {
-  // Array privado de películas favoritas
-  // "private" impide que los componentes modifiquen el array directamente
-  private favoritas: Movie[] = [];
+  private favoritasSubject = new BehaviorSubject<Movie[]>([]);
 
-  // Retorna una copia del array (para evitar mutación externa)
-  // El spread operator [...] crea un nuevo array con los mismos elementos
-  obtenerTodas(): Movie[] {
-    return [...this.favoritas];
-  }
+  
+  favoritas$: Observable<Movie[]> = this.favoritasSubject.asObservable();
 
-  // Agrega una película a favoritos si no está ya
+  cantidad$: Observable<number> = this.favoritas$.pipe(
+    map(favs => favs.length)
+  );
+
   agregar(movie: Movie): void {
-    // .find() busca un elemento que cumpla la condición
-    // Si no lo encuentra, retorna undefined
-    if (!this.favoritas.find(m => m.id === movie.id)) {
-      this.favoritas.push(movie);
+    const actuales = this.favoritasSubject.value;
+    if (!actuales.find(m => m.id === movie.id)) {
+      
+      this.favoritasSubject.next([...actuales, movie]);
     }
   }
 
-  // Elimina una película de favoritos por su ID
   eliminar(id: number): void {
-    // .filter() crea un nuevo array sin el elemento eliminado
-    this.favoritas = this.favoritas.filter(m => m.id !== id);
+    const nuevas = this.favoritasSubject.value.filter(m => m.id !== id);
+    this.favoritasSubject.next(nuevas);
   }
 
-  // Verifica si una película es favorita
   esFavorita(id: number): boolean {
-    // .some() retorna true si al menos un elemento cumple la condición
-    return this.favoritas.some(m => m.id === id);
+    return this.favoritasSubject.value.some(m => m.id === id);
   }
 
-  // Alterna el estado de favorito (agrega si no está, quita si está)
   toggle(movie: Movie): void {
     if (this.esFavorita(movie.id)) {
       this.eliminar(movie.id);
@@ -44,8 +39,11 @@ export class FavoritesService {
     }
   }
 
-  // Retorna la cantidad de favoritas
+  obtenerTodas(): Movie[] {
+    return this.favoritasSubject.value;
+  }
+
   obtenerCantidad(): number {
-    return this.favoritas.length;
+    return this.favoritasSubject.value.length;
   }
 }

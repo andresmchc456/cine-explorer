@@ -1,12 +1,13 @@
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { RouterLink, RouterLinkActive, Router } from '@angular/router';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, FormsModule],
+  imports: [RouterLink, RouterLinkActive, ReactiveFormsModule],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.scss']
 })
@@ -14,19 +15,24 @@ export class Navbar {
   private favoritesService = inject(FavoritesService);
   private router = inject(Router);
 
-  termino = '';
+  searchControl = new FormControl('');
 
   get cantidadFavoritas(): number {
     return this.favoritesService.obtenerCantidad();
   }
 
-  buscar(): void {
-    const query = this.termino.trim();
-    if (!query) {
-      return;
-    }
-    this.router.navigate(['/search'], {
-      queryParams: { q: query }
+  constructor() {
+    
+    this.searchControl.valueChanges.pipe(
+      
+      debounceTime(300),
+    
+      distinctUntilChanged(),
+      
+      filter(term => !!term && term.length >= 2)
+    ).subscribe(term => {
+      
+      this.router.navigate(['/search'], { queryParams: { q: term } });
     });
   }
 }
