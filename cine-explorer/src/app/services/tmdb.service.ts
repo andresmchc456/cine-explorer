@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, throwError, timeout } from 'rxjs';
 import { Movie, MovieResponse, MovieDetail, Credits, Genre } from '../models/movie';
 import { environment } from '../../environments/environment';
 
@@ -44,6 +44,7 @@ export class TmdbService {
         language: 'es-ES'
       }
     }).pipe(
+      timeout(10000),
       catchError((error) => {
         console.error('Error HTTP detalle:', error);
         return throwError(() => new Error(this.mapError(error)));
@@ -68,6 +69,7 @@ export class TmdbService {
 
   obtenerCreditos(id: number): Observable<Credits> {
     return this.http.get<Credits>(`${this.apiUrl}/movie/${id}/credits`).pipe(
+      timeout(10000),
       catchError((error) => {
         console.error('Error HTTP créditos:', error);
         return throwError(() => new Error(this.mapError(error)));
@@ -89,7 +91,15 @@ export class TmdbService {
   }
 
   private mapError(error: any): string {
-    if (!error || !error.status) {
+    if (!error) {
+      return 'Sin conexión a internet';
+    }
+
+    if (error.name === 'TimeoutError') {
+      return 'La petición tardó demasiado. Intenta de nuevo.';
+    }
+
+    if (!error.status) {
       return 'Sin conexión a internet';
     }
 

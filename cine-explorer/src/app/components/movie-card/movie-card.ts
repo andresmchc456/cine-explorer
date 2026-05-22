@@ -1,18 +1,18 @@
 // movie-card.component.ts
 // Componente que muestra una tarjeta con la información de una película
-import { Component, input, output } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, input, output } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'app-movie-card',
   standalone: true,
-  imports: [RouterLink],
   templateUrl: './movie-card.html',
   styleUrls: ['./movie-card.scss']
 })
 export class MovieCardComponent {
+  private router = inject(Router);
   // Por ahora usamos datos de ejemplo hardcodeados
   // En el próximo capítulo recibiremos los datos del componente padre con @Input
 
@@ -25,6 +25,11 @@ export class MovieCardComponent {
 
   onToggleFavorito(): void {
     this.toggleFavorito.emit(this.movie());
+  }
+
+  verDetalle(): void {
+    const id = this.movie().id;
+    this.router.navigate(['/movie', id]);
   }
 }
 

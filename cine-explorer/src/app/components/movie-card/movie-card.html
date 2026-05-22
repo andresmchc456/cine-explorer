@@ -17,10 +17,12 @@
 
     <!-- Botón de favorito: cambia según el estado -->
     <div class="d-flex gap-2 mt-auto">
-      <a [routerLink]="['/movie', movie().id]"
-         class="btn btn-outline-primary flex-grow-1">
+      <button
+        type="button"
+        class="btn btn-outline-primary flex-grow-1"
+        (click)="verDetalle()">
         Ver detalle
-      </a>
+      </button>
       <button
         class="btn"
         [class.btn-danger]="esFavorita()"

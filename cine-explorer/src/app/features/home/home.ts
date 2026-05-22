@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { MovieCardComponent } from '../../components/movie-card/movie-card';
 import { TmdbService } from '../../services/tmdb.service';
 import { FavoritesService } from '../../services/favorites.service';
@@ -14,6 +14,7 @@ import { Movie } from '../../models/movie';
 export class Home implements OnInit {
   private tmdbService = inject(TmdbService);
   private favoritesService = inject(FavoritesService);
+  private cdr = inject(ChangeDetectorRef);
 
   peliculas: Movie[] = [];
   cargando = true;
@@ -31,11 +32,13 @@ export class Home implements OnInit {
       next: (response) => {
         this.peliculas = response.results;
         this.cargando = false;
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Error al cargar películas:', err);
         this.error = err?.message || 'No se pudieron cargar las películas. Verifica tu conexión.';
         this.cargando = false;
+        this.cdr.markForCheck();
       }
     });
   }
