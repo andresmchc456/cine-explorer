@@ -16,25 +16,31 @@ import { Spinner } from '../../shared/components/spinner/spinner';
   templateUrl: './movie-detail.html'
 })
 export class MovieDetailComponent implements OnInit {
+  // Servicios inyectados necesarios para:
+  // - route: leer el id de la película desde la URL
+  // - tmdbService: consultar detalles y créditos de TMDB
+  // - favoritesService: marcar/desmarcar favoritos
+  // - cdr: forzar detección de cambios cuando se actualiza el estado manualmente
   private route = inject(ActivatedRoute);
   private tmdbService = inject(TmdbService);
   private favoritesService = inject(FavoritesService);
   private cdr = inject(ChangeDetectorRef);
 
   // Estado del componente
-  pelicula: MovieDetail | null = null;  // null mientras carga
+  // pelicula == null indica que aún no se cargó la data.
+  pelicula: MovieDetail | null = null;
   creditos: Credits | null = null;
   cargando: boolean = true;
   error: string = '';
 
   ngOnInit(): void {
-    // Leer el parámetro :id de la URL
+    // Leer el parámetro :id de la URL y cargar los datos.
     const id = +this.route.snapshot.params['id'];
     this.cargarPelicula(id);
     this.cargarCreditos(id);
   }
 
-  // Cargar detalle de la película
+  // Carga el detalle completo de la película desde TMDB.
   cargarPelicula(id: number): void {
     this.tmdbService.obtenerDetalle(id).subscribe({
       next: (data) => {
@@ -43,14 +49,16 @@ export class MovieDetailComponent implements OnInit {
         this.cdr.markForCheck();
       },
       error: () => {
+        // Mostrar mensaje si falla la carga.
         this.error = 'No se pudo cargar la película';
         this.cargando = false;
-       this.cdr.markForCheck();
+        this.cdr.markForCheck();
       }
     });
   }
 
-  // Cargar créditos (reparto)
+  // Cargar créditos (reparto) y guardarlos en el estado local.
+  // Estos datos se muestran en la sección de reparto de la plantilla.
   cargarCreditos(id: number): void {
     this.tmdbService.obtenerCreditos(id).subscribe({
       next: (data) => this.creditos = data
@@ -58,11 +66,13 @@ export class MovieDetailComponent implements OnInit {
   }
 
   // Verificar si la película cargada está en favoritos.
+  // Se utiliza para cambiar el texto y la clase del botón.
   get esFavorita(): boolean {
     return this.pelicula ? this.favoritesService.esFavorita(this.pelicula.id) : false;
   }
 
   // Alterna la película en favoritos cuando el usuario hace clic.
+  // Usa el servicio para persistir el estado en localStorage.
   toggleFavorito(): void {
     if (this.pelicula) {
       this.favoritesService.toggle(this.pelicula);

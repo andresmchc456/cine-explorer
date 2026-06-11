@@ -13,14 +13,16 @@ import { Movie } from '../../core/models';
   styleUrls: ['./favorites.scss']
 })
 export class Favorites {
+  // Inyecta el servicio de favoritas para leer/actualizar el estado.
   private favoritesService = inject(FavoritesService);
 
-  // Lista reactiva de favoritas leída desde el servicio.
+  // Lista de películas favoritas almacenada localmente.
   get favoritas(): Movie[] {
     return this.favoritesService.obtenerTodas();
   }
 
-  // Quita o agrega una película de favoritas.
+  // Se ejecuta cuando el usuario hace clic en el corazón de una tarjeta.
+  // Si ya es favorita, se elimina; si no, se agrega.
   toggleFavorito(movie: Movie): void {
     this.favoritesService.toggle(movie);
   }
