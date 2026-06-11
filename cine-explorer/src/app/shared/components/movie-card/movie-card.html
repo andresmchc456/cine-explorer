@@ -1,4 +1,5 @@
 <div class="card shadow-sm h-100">
+  <!-- Poster de la película -->
   <img
     [src]="movie().poster_path | tmdbImage:'w500'"
     [alt]="movie().title"
@@ -7,14 +8,16 @@
   <div class="card-body d-flex flex-column">
     <h5 class="card-title">{{ movie().title }}</h5>
 
+    <!-- Puntuación representada en estrellas -->
     <p class="mb-1">{{ movie().vote_average | stars }}</p>
     <small class="text-muted mb-2">{{ movie().vote_average }} / 10</small>
 
+    <!-- Resumen corto de la película -->
     <p class="card-text flex-grow-1">
       {{ movie().overview | truncate:120 }}
     </p>
 
-    <!-- Botón de favorito: cambia según el estado -->
+    <!-- Botones de acción: ver detalle y favorito -->
     <div class="d-flex gap-2 mt-auto">
       <button
         type="button"

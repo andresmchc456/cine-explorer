@@ -1,5 +1,6 @@
 <h2 class="mb-4">❤️ Mis favoritas</h2>
 
+<!-- Si hay películas favoritas, se muestran en tarjetas -->
 @if (favoritas.length > 0) {
   <div class="row g-4">
     @for (movie of favoritas; track movie.id) {
@@ -12,6 +13,7 @@
     }
   </div>
 } @else {
+  <!-- Mensaje alternativo cuando no hay favoritas -->
   <div class="text-center py-5">
     <p class="display-1">🎬</p>
     <h4 class="text-muted">No tienes películas favoritas</h4>

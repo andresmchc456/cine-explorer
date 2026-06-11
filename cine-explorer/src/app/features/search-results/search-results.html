@@ -1,17 +1,21 @@
 <h2 class="mb-4">🔍 Resultados para "{{ termino }}"</h2>
 
+<!-- Condición de carga -->
 @if (cargando) {
   <app-spinner />
 } @else if (error) {
+  <!-- Mensaje de error si falla la búsqueda -->
   <div class="alert alert-danger" role="alert">
     {{ error }}
   </div>
 } @else if (resultados.length === 0 && termino) {
+  <!-- Mensaje cuando no hay resultados para el término buscado -->
   <div class="text-center py-5">
     <p class="display-1">🎬</p>
     <h4 class="text-muted">No se encontraron resultados para "{{ termino }}"</h4>
   </div>
 } @else {
+  <!-- Lista de tarjetas de películas encontradas -->
   <div class="row g-4">
     @for (movie of resultados; track movie.id) {
       <div class="col-12 col-sm-6 col-md-4 col-lg-3">
