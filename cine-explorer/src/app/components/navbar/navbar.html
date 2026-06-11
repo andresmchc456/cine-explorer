@@ -33,6 +33,9 @@
           placeholder="Buscar películas..."
           aria-label="Buscar">
       </form>
+      <button (click)="toggleTema()" class="btn btn-outline-light btn-sm ms-2">
+        {{ temaActual === 'light' ? '🌙' : '☀️' }}
+      </button>
     </div>
   </div>
 </nav>

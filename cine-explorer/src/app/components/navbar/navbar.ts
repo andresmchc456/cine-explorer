@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
 import { FavoritesService } from '../../services/favorites.service';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +14,21 @@ import { FavoritesService } from '../../services/favorites.service';
 })
 export class Navbar {
   private favoritesService = inject(FavoritesService);
+  private themeService = inject(ThemeService);
   private router = inject(Router);
 
   searchControl = new FormControl('');
 
   get cantidadFavoritas(): number {
     return this.favoritesService.obtenerCantidad();
+  }
+
+  get temaActual(): string {
+    return this.themeService.obtenerTema();
+  }
+
+  toggleTema(): void {
+    this.themeService.toggle();
   }
 
   constructor() {
