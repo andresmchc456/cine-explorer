@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { filter, switchMap, tap, distinctUntilChanged } from 'rxjs';
 import { TmdbService } from '../../services/tmdb.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { MovieCardComponent } from '../../components/movie-card/movie-card';
@@ -23,21 +24,23 @@ export class SearchResults implements OnInit {
   error = '';
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.termino = params['q'] || '';
-      if (this.termino) {
-        this.buscar(this.termino);
-      } else {
-        this.resultados = [];
-      }
-    });
-  }
-
-  buscar(termino: string): void {
-    this.cargando = true;
-    this.error = '';
-
-    this.tmdbService.buscar(termino).subscribe({
+    this.route.queryParams.pipe(
+      distinctUntilChanged((prev, curr) => prev['q'] === curr['q']),
+      tap(params => {
+        this.termino = params['q'] || '';
+        if (!this.termino) {
+          this.cargando = false;
+          this.resultados = [];
+          this.error = '';
+        }
+      }),
+      filter(params => !!params['q']),
+      tap(() => {
+        this.cargando = true;
+        this.error = '';
+      }),
+      switchMap(params => this.tmdbService.buscar(params['q']))
+    ).subscribe({
       next: (response) => {
         this.resultados = response.results;
         this.cargando = false;
