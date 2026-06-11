@@ -4,12 +4,13 @@ import { filter, switchMap, tap, distinctUntilChanged } from 'rxjs';
 import { TmdbService } from '../../services/tmdb.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { MovieCardComponent } from '../../components/movie-card/movie-card';
+import { Spinner } from '../../components/spinner/spinner';
 import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'app-search-results',
   standalone: true,
-  imports: [MovieCardComponent],
+  imports: [MovieCardComponent, Spinner],
   templateUrl: './search-results.html',
   styleUrls: ['./search-results.scss']
 })

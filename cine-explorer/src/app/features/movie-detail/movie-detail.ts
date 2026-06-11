@@ -7,11 +7,12 @@ import { FavoritesService } from '../../services/favorites.service';
 import { MovieDetail, Credits } from '../../models/movie';
 import { UpperCasePipe } from '@angular/common';
 import { ReviewForm } from './review-form/review-form';
+import { Spinner } from '../../components/spinner/spinner';
 
 @Component({
   selector: 'app-movie-detail',
   standalone: true,
-  imports: [RouterLink, UpperCasePipe, ReviewForm],
+  imports: [RouterLink, UpperCasePipe, ReviewForm, Spinner],
   templateUrl: './movie-detail.html'
 })
 export class MovieDetailComponent implements OnInit {
