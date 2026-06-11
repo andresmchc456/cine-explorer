@@ -6,11 +6,12 @@ import { TmdbService } from '../../services/tmdb.service';
 import { FavoritesService } from '../../services/favorites.service';
 import { MovieDetail, Credits } from '../../models/movie';
 import { UpperCasePipe } from '@angular/common';
+import { ReviewForm } from './review-form/review-form';
 
 @Component({
   selector: 'app-movie-detail',
   standalone: true,
-  imports: [RouterLink ,UpperCasePipe],
+  imports: [RouterLink, UpperCasePipe, ReviewForm],
   templateUrl: './movie-detail.html'
 })
 export class MovieDetailComponent implements OnInit {
