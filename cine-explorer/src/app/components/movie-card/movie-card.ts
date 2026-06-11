@@ -4,10 +4,14 @@ import { Component, inject, input, output } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Movie } from '../../models/movie';
+import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
+import { TmdbImagePipe } from '../../shared/pipes/tmdb-image.pipe';
+import { StarsPipe } from '../../shared/pipes/stars.pipe';
 
 @Component({
   selector: 'app-movie-card',
   standalone: true,
+  imports: [TruncatePipe, TmdbImagePipe, StarsPipe],
   templateUrl: './movie-card.html',
   styleUrls: ['./movie-card.scss']
 })
