@@ -5,6 +5,7 @@ import { TmdbService } from '../../core/services/tmdb.service';
 import { FavoritesService } from '../../core/services/favorites.service';
 import { Movie } from '../../core/models';
 
+// Página principal que muestra películas populares.
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -44,10 +45,12 @@ export class Home implements OnInit {
     });
   }
 
+  // Verifica si una película está en favoritos.
   esFavorita(id: number): boolean {
     return this.favoritesService.esFavorita(id);
   }
 
+  // Alterna el estado favorito de una película.
   toggleFavorito(movie: Movie): void {
     this.favoritesService.toggle(movie);
   }

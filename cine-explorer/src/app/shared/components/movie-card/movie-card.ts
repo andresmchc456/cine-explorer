@@ -15,20 +15,21 @@ import { TruncatePipe, TmdbImagePipe, StarsPipe } from '../../pipes';
 })
 export class MovieCardComponent {
   private router = inject(Router);
-  // Por ahora usamos datos de ejemplo hardcodeados
-  // En el próximo capítulo recibiremos los datos del componente padre con @Input
 
+  // Datos de la película recibidos desde el componente padre.
   movie = input.required<Movie>();
 
-  // input<boolean>() con valor por defecto false (no es obligatorio pasarlo)
+  // Indica si la película ya está en favoritos.
   esFavorita = input<boolean>(false);
 
+  // Evento que emite la película cuando el usuario hace clic en favorito.
   toggleFavorito = output<Movie>();
 
   onToggleFavorito(): void {
     this.toggleFavorito.emit(this.movie());
   }
 
+  // Navega a la pantalla de detalle de la película.
   verDetalle(): void {
     const id = this.movie().id;
     this.router.navigate(['/movie', id]);

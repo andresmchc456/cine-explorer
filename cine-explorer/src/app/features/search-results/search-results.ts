@@ -7,6 +7,7 @@ import { MovieCardComponent } from '../../shared/components/movie-card/movie-car
 import { Spinner } from '../../shared/components/spinner/spinner';
 import { Movie } from '../../core/models';
 
+// Página de resultados de búsqueda.
 @Component({
   selector: 'app-search-results',
   standalone: true,
@@ -54,10 +55,12 @@ export class SearchResults implements OnInit {
     });
   }
 
+  // Verifica si una película está marcada como favorita.
   esFavorita(id: number): boolean {
     return this.favoritesService.esFavorita(id);
   }
 
+  // Alterna el estado favorito de una película.
   toggleFavorito(movie: Movie): void {
     this.favoritesService.toggle(movie);
   }

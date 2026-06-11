@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class StorageService {
 
-  // Obtener un valor de localStorage con tipado genérico
+  // Obtener un valor de localStorage con tipado genérico.
+  // Si no existe o hay un error, devuelve defaultValue.
   get<T>(key: string, defaultValue: T): T {
     try {
       const data = localStorage.getItem(key);
@@ -15,7 +16,7 @@ export class StorageService {
     }
   }
 
-  // Guardar un valor en localStorage
+  // Guardar un valor en localStorage.
   set<T>(key: string, value: T): void {
     try {
       localStorage.setItem(key, JSON.stringify(value));
@@ -24,12 +25,12 @@ export class StorageService {
     }
   }
 
-  // Eliminar un valor
+  // Eliminar un valor concreto de localStorage.
   remove(key: string): void {
     localStorage.removeItem(key);
   }
 
-  // Limpiar todo localStorage
+  // Limpiar todo el localStorage.
   clear(): void {
     localStorage.clear();
   }

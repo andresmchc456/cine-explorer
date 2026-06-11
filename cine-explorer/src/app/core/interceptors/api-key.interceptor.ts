@@ -3,6 +3,7 @@ import { environment } from '../../../environments/environment';
 
 const API_KEY = environment.tmdbApiKey;
 
+// Interceptor global que añade la API key de TMDB a todas las solicitudes dirigidas a TMDB.
 export const apiKeyInterceptor: HttpInterceptorFn = (req, next) => {
   if (req.url.includes('api.themoviedb.org')) {
     if (!API_KEY) {

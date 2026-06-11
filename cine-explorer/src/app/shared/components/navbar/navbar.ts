@@ -17,6 +17,7 @@ export class Navbar {
   private themeService = inject(ThemeService);
   private router = inject(Router);
 
+  // Control del input de búsqueda.
   searchControl = new FormControl('');
 
   get cantidadFavoritas(): number {
@@ -27,21 +28,18 @@ export class Navbar {
     return this.themeService.obtenerTema();
   }
 
+  // Cambia el tema entre claro y oscuro.
   toggleTema(): void {
     this.themeService.toggle();
   }
 
   constructor() {
-    
+    // Escuchar cambios en el campo de búsqueda y navegar a /search.
     this.searchControl.valueChanges.pipe(
-      
       debounceTime(300),
-    
       distinctUntilChanged(),
-      
       filter(term => !!term && term.length >= 2)
     ).subscribe(term => {
-      
       this.router.navigate(['/search'], { queryParams: { q: term } });
     });
   }

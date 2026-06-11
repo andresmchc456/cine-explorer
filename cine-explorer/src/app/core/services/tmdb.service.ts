@@ -6,10 +6,12 @@ import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TmdbService {
+  // Inyectamos HttpClient con la nueva API de Angular standalone.
   private http = inject(HttpClient);
   private apiUrl = environment.tmdbBaseUrl;
   private apiKey = environment.tmdbApiKey;
 
+  // Traer películas populares de TMDB.
   obtenerPopulares(page: number = 1): Observable<MovieResponse> {
     return this.http.get<MovieResponse>(`${this.apiUrl}/movie/popular`, {
       params: {
@@ -24,6 +26,7 @@ export class TmdbService {
     );
   }
 
+  // Traer películas mejor valoradas.
   obtenerTopRated(page: number = 1): Observable<MovieResponse> {
     return this.http.get<MovieResponse>(`${this.apiUrl}/movie/top_rated`, {
       params: {
@@ -38,6 +41,7 @@ export class TmdbService {
     );
   }
 
+  // Obtener detalle completo de una película.
   obtenerDetalle(id: number): Observable<MovieDetail> {
     return this.http.get<MovieDetail>(`${this.apiUrl}/movie/${id}`, {
       params: {
@@ -52,6 +56,7 @@ export class TmdbService {
     );
   }
 
+  // Buscar películas por texto.
   buscar(query: string, page: number = 1): Observable<MovieResponse> {
     return this.http.get<MovieResponse>(`${this.apiUrl}/search/movie`, {
       params: {
@@ -67,6 +72,7 @@ export class TmdbService {
     );
   }
 
+  // Obtener reparto y equipo de la película.
   obtenerCreditos(id: number): Observable<Credits> {
     return this.http.get<Credits>(`${this.apiUrl}/movie/${id}/credits`).pipe(
       timeout(10000),
@@ -77,6 +83,7 @@ export class TmdbService {
     );
   }
 
+  // Obtener lista de géneros disponibles en TMDB.
   obtenerGeneros(): Observable<{ genres: Genre[] }> {
     return this.http.get<{ genres: Genre[] }>(`${this.apiUrl}/genre/movie/list`, {
       params: {
@@ -90,6 +97,7 @@ export class TmdbService {
     );
   }
 
+  // Convierte errores HTTP comunes en mensajes legibles.
   private mapError(error: any): string {
     if (!error) {
       return 'Sin conexión a internet';

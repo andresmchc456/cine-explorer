@@ -1,10 +1,12 @@
 <h2 class="mb-4">🔥 Películas populares</h2>
 
 @if (cargando) {
+  <!-- Spinner mientras se cargan los datos -->
   <app-spinner />
 }
 
 @if (error) {
+  <!-- Mensaje de error en caso de fallo de red o API -->
   <div class="alert alert-danger" role="alert">
     {{ error }}
     <button class="btn btn-outline-danger btn-sm ms-2" (click)="cargarPeliculas()">

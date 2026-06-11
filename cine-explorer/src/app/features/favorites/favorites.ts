@@ -4,6 +4,7 @@ import { MovieCardComponent } from '../../shared/components/movie-card/movie-car
 import { FavoritesService } from '../../core/services/favorites.service';
 import { Movie } from '../../core/models';
 
+// Página de favoritas. Muestra las películas guardadas como favoritas.
 @Component({
   selector: 'app-favorites',
   standalone: true,
@@ -14,10 +15,12 @@ import { Movie } from '../../core/models';
 export class Favorites {
   private favoritesService = inject(FavoritesService);
 
+  // Lista reactiva de favoritas leída desde el servicio.
   get favoritas(): Movie[] {
     return this.favoritesService.obtenerTodas();
   }
 
+  // Quita o agrega una película de favoritas.
   toggleFavorito(movie: Movie): void {
     this.favoritesService.toggle(movie);
   }

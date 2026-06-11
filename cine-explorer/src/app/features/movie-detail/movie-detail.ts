@@ -57,12 +57,12 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  // Verificar si es favorita
+  // Verificar si la película cargada está en favoritos.
   get esFavorita(): boolean {
     return this.pelicula ? this.favoritesService.esFavorita(this.pelicula.id) : false;
   }
 
-  // Alternar favorito
+  // Alterna la película en favoritos cuando el usuario hace clic.
   toggleFavorito(): void {
     if (this.pelicula) {
       this.favoritesService.toggle(this.pelicula);
