@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  tmdbApiKey: '59e5f859776ac779f0e25d6e5a610145'
+  tmdbApiKey: '59e5f859776ac779f0e25d6e5a610145',
+  tmdbBaseUrl: 'https://api.themoviedb.org/3'
 };

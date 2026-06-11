@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MovieCardComponent } from '../../components/movie-card/movie-card';
-import { FavoritesService } from '../../services/favorites.service';
-import { Movie } from '../../models/movie';
+import { MovieCardComponent } from '../../shared/components/movie-card/movie-card';
+import { FavoritesService } from '../../core/services/favorites.service';
+import { Movie } from '../../core/models';
 
 @Component({
   selector: 'app-favorites',

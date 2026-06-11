@@ -1,9 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
-import { MovieCardComponent } from '../../components/movie-card/movie-card';
-import { Spinner } from '../../components/spinner/spinner';
-import { TmdbService } from '../../services/tmdb.service';
-import { FavoritesService } from '../../services/favorites.service';
-import { Movie } from '../../models/movie';
+import { MovieCardComponent } from '../../shared/components/movie-card/movie-card';
+import { Spinner } from '../../shared/components/spinner/spinner';
+import { TmdbService } from '../../core/services/tmdb.service';
+import { FavoritesService } from '../../core/services/favorites.service';
+import { Movie } from '../../core/models';
 
 @Component({
   selector: 'app-home',

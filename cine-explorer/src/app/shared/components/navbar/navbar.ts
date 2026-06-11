@@ -2,8 +2,8 @@ import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
-import { FavoritesService } from '../../services/favorites.service';
-import { ThemeService } from '../../services/theme.service';
+import { FavoritesService } from '../../../core/services/favorites.service';
+import { ThemeService } from '../../../core/services/theme.service';
 
 @Component({
   selector: 'app-navbar',

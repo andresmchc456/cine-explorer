@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs';
-import { Movie } from '../models/movie';
+import { Movie } from '../models';
 import { StorageService } from './storage.service';
 
 @Injectable({ providedIn: 'root' })

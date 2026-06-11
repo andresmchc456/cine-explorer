@@ -2,12 +2,12 @@
 // Página de detalle que carga datos reales de la API
 import { Component, OnInit, inject,ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { TmdbService } from '../../services/tmdb.service';
-import { FavoritesService } from '../../services/favorites.service';
-import { MovieDetail, Credits } from '../../models/movie';
+import { TmdbService } from '../../core/services/tmdb.service';
+import { FavoritesService } from '../../core/services/favorites.service';
+import { MovieDetail, Credits } from '../../core/models';
 import { UpperCasePipe } from '@angular/common';
 import { ReviewForm } from './review-form/review-form';
-import { Spinner } from '../../components/spinner/spinner';
+import { Spinner } from '../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-movie-detail',

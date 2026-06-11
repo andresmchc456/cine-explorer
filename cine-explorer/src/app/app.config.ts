@@ -18,7 +18,7 @@ import {
   withEventReplay
 } from '@angular/platform-browser';
 
-import { apiKeyInterceptor } from './interceptors/api-key.interceptor';
+import { apiKeyInterceptor } from './core/interceptors/api-key.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

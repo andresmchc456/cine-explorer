@@ -1,13 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError, timeout } from 'rxjs';
-import { Movie, MovieResponse, MovieDetail, Credits, Genre } from '../models/movie';
-import { environment } from '../../environments/environment';
+import { Movie, MovieResponse, MovieDetail, Credits, Genre } from '../models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TmdbService {
   private http = inject(HttpClient);
-  private apiUrl = 'https://api.themoviedb.org/3';
+  private apiUrl = environment.tmdbBaseUrl;
   private apiKey = environment.tmdbApiKey;
 
   obtenerPopulares(page: number = 1): Observable<MovieResponse> {

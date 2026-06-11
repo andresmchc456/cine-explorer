@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { filter, switchMap, tap, distinctUntilChanged } from 'rxjs';
-import { TmdbService } from '../../services/tmdb.service';
-import { FavoritesService } from '../../services/favorites.service';
-import { MovieCardComponent } from '../../components/movie-card/movie-card';
-import { Spinner } from '../../components/spinner/spinner';
-import { Movie } from '../../models/movie';
+import { TmdbService } from '../../core/services/tmdb.service';
+import { FavoritesService } from '../../core/services/favorites.service';
+import { MovieCardComponent } from '../../shared/components/movie-card/movie-card';
+import { Spinner } from '../../shared/components/spinner/spinner';
+import { Movie } from '../../core/models';
 
 @Component({
   selector: 'app-search-results',
